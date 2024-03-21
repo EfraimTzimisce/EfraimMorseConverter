@@ -1,0 +1,44 @@
+import tkinter as tk
+
+# morse dictionary
+morse_code = {'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....',
+              'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.',
+              'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+              'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....',
+              '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----'}
+
+# morse converter function
+def text_to_morse(text):
+    morse_text = ''
+    for char in text.upper():
+        if char == ' ':
+            morse_text += '/'
+        elif char in morse_code:
+            morse_text += morse_code[char] + ' '
+    return morse_text
+
+# button press function
+def submit_text():
+    text = entry.get()
+    morse_text = text_to_morse(text)
+    morse_label.config(text=morse_text)
+
+# GUI create
+root = tk.Tk()
+root.title("Преобразование текста в азбуку Морзе")
+root.geometry("500x500")
+root.configure(bg='lightgreen')
+
+label = tk.Label(root, text="Введите текст:", bg='lightgreen')
+label.pack()
+
+entry = tk.Entry(root, width=50)
+entry.pack()
+
+submit_button = tk.Button(root, text="Преобразовать", command=submit_text)
+submit_button.pack()
+
+morse_label = tk.Label(root, text="", bg='lightgreen')
+morse_label.pack()
+
+root.mainloop()
